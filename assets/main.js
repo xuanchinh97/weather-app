@@ -50,3 +50,94 @@ searchInput.addEventListener('change', (e) => {
             wind.innerHTML = (data.wind.speed * 3.6).toFixed(2) || DEFAULT_VALUE
         })
 })
+
+
+// assistant
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+
+const recognition = new SpeechRecognition();
+const synth = window.speechSynthesis
+recognition.lang = 'vi-VI'
+recognition.continuous = false
+const microphone = document.querySelector(".microphone")
+
+const speak = (text) => {
+    if (synth.speaking) {
+        console.error('Busy. Speaking...')
+        return
+    }
+    const utter = new SpeechSynthesisUtterance(text)
+
+    utter.onend = () => {
+        console.log('SpeechSynthesisUtterance.onend')
+    }
+
+    utter.onerror = (error) => {
+        console.error('SpeechSynthesisUtterance.onerror', error)
+    }
+
+    synth.speak(utter)
+}
+
+const handleVoice = (text) => {
+    const handleText = text.toLowerCase()
+
+    // "thời tiết tại Ninh Bình" => ["thời tiết tại", "Ninh Bình"]
+    if (handleText.includes('thời tiết tại')) {
+        const location = handleText.split('tại')[1].trim()
+
+        searchInput.value = location
+        const changeEvent = new Event('change')
+        searchInput.dispatchEvent(changeEvent)
+        return
+    }
+    // "thay đổi màu nền"
+    if (handleText.includes('thay đổi màu nền')) {
+        const color = handleText.split('màu nền')[1].trim()
+        const container = document.querySelector('.container')
+        container.style.background = color
+        return
+    }
+
+    // 'màu nền mặc định'
+    if (handleText.includes('màu nền mặc định')) {
+        container.style.background = ''
+        return
+    }
+
+    //
+    if (handleText.includes('mấy giờ')) {
+        const textToSpeech = `${moment().hours()} hours ${moment().minutes()} minutes`
+        return
+    }
+
+    speak('Try again')
+
+}
+
+
+microphone.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    recognition.start()
+    microphone.classList.add('recording')
+})
+
+recognition.onspeechend = () => {
+    recognition.stop()
+    microphone.classList.remove('recording')
+}
+
+recognition.onerror = (err) => {
+    console.error("lỗi", err)
+    microphone.classList.remove('recording')
+
+}
+
+recognition.onresult = (e) => {
+    console.log('onresult', e)
+
+    const text = e.results[0][0].transcript
+    handleVoice(text)
+}
