@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -8,6 +10,7 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 @keyframes gradient {
@@ -25,22 +28,23 @@ body {
 .container {
   color: white;
   width: 400px;
-  border-radius: 20px;
+  border-radius: 100px 0;
   font-size: 14px;
   background: linear-gradient(145deg, #005a20, #4794a1, #005a20, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  box-shadow: 3px 3px 5px rgba(255, 255, 255, 0.822);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.822);
   margin: auto;
   padding: 10px;
   margin-top: 50px;
 }
 
 .search-bar {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   padding-top: 20px;
   display: flex;
+  justify-content: end;
   position: relative;
   align-items: center;
   border-bottom: 1px solid white;
@@ -52,6 +56,41 @@ body {
   left: 0;
 }
 
+.microphone {
+  cursor: pointer;
+}
+
+.microphone .recording-icon {
+  display: none;
+  width: 10px;
+  height: 10px;
+  background-color: #e22d2d;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite linear;
+}
+
+.microphone.recording .recording-icon {
+  display: inline-block;
+}
+
+.microphone.recording .fa-microphone {
+  display: none;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 3px 0 rgba(173, 0, 0, .3);
+  }
+  65% {
+    box-shadow: 0 0 3px 0 rgba(173, 0, 0, .3);
+  }
+  100% {
+    box-shadow: 0 0 3px 0 rgba(173, 0, 0, 0);
+  }
+}
+
+
+
 #search-input {
   border: 0;
   outline: 0;
@@ -59,7 +98,7 @@ body {
   background: transparent;
   height: 20px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #search-input::placeholder {
@@ -81,7 +120,8 @@ body {
 }
 
 .weather-state {
-  font-size: 13px;
+  font-size: 20px;
+  padding: 10px 0;
 }
 
 .weather-icon {
@@ -132,5 +172,6 @@ body {
     margin-top: 0;
     margin-bottom: 0;
     border-radius: 0;
+    width: 100%;
   }
 }
