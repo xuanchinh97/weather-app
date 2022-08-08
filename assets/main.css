@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,700;1,300&display=swap");
 
 * {
   padding: 0;
@@ -10,7 +10,7 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  font-family: 'Merriweather Sans', sans-serif;
+  font-family: "Merriweather Sans", sans-serif;
 }
 
 @keyframes gradient {
@@ -37,14 +37,19 @@ body {
   margin: auto;
   padding: 10px;
   margin-top: 50px;
+  /* position: sticky;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 
 .search-bar {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   padding-top: 20px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   position: relative;
   align-items: center;
   border-bottom: 1px solid white;
@@ -54,10 +59,13 @@ body {
   margin-right: 5px;
   position: absolute;
   left: 0;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .microphone {
   cursor: pointer;
+  padding: 5px;
 }
 
 .microphone .recording-icon {
@@ -79,17 +87,15 @@ body {
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 3px 0 rgba(173, 0, 0, .3);
+    box-shadow: 0 0 0 5px rgba(173, 0, 0, 0.5);
   }
   65% {
-    box-shadow: 0 0 3px 0 rgba(173, 0, 0, .3);
+    box-shadow: 0 0 0 5px rgba(173, 0, 0, 0.5);
   }
   100% {
-    box-shadow: 0 0 3px 0 rgba(173, 0, 0, 0);
+    box-shadow: 0 0 0 5px rgba(173, 0, 0, 0);
   }
 }
-
-
 
 #search-input {
   border: 0;
@@ -99,6 +105,8 @@ body {
   height: 20px;
   color: white;
   font-size: 16px;
+  flex: 1;
+  margin-left: 5px;
 }
 
 #search-input::placeholder {
@@ -166,6 +174,30 @@ body {
   font-weight: 400;
 }
 
+.animation-leaf-left {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 200px;
+}
+.animation-leaf-right {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 250px;
+}
+.animation-tree-left {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+}
+.animation-tree-right {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+}
 @media screen and (max-width: 768px) {
   .container {
     height: 100vh;
@@ -173,5 +205,11 @@ body {
     margin-bottom: 0;
     border-radius: 0;
     width: 100%;
+  }
+  .animation-leaf-left,
+  .animation-leaf-right,
+  .animation-tree-left,
+  .animation-tree-right {
+    display: none;
   }
 }

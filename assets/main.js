@@ -102,18 +102,19 @@ const handleVoice = (text) => {
 
     // 'màu nền mặc định'
     if (handleText.includes('màu nền mặc định')) {
+        const container = document.querySelector('.container')
         container.style.background = ''
         return
     }
 
-    //
+    // 'mấy giờ'
     if (handleText.includes('mấy giờ')) {
         const textToSpeech = `${moment().hours()} hours ${moment().minutes()} minutes`
+        speak(textToSpeech)
         return
     }
 
     speak('Try again')
-
 }
 
 
@@ -130,9 +131,8 @@ recognition.onspeechend = () => {
 }
 
 recognition.onerror = (err) => {
-    console.error("lỗi", err)
+    console.error("onerror: ", err)
     microphone.classList.remove('recording')
-
 }
 
 recognition.onresult = (e) => {
